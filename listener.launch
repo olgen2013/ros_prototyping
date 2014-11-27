@@ -1,0 +1,6 @@
+<launch>
+	<group ns="r1">
+		<node name="listener" pkg="ros_prototyping" type="listener.py" output="screen">
+		</node>
+	</group>
+</launch>

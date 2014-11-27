@@ -1,0 +1,13 @@
+# version of config file
+config_version: 1
+# text message which should be published
+message: 'HELLO MY FRIEND ... '
+
+# list info
+list_of_numbers:
+- id: 1
+  name: "nase"
+  age: 23
+- id: 2
+  name: fred
+  age: 34
