@@ -50,7 +50,7 @@ def talker():
 
     if rospy.has_param('/r1/talker/list_of_numbers'):
 	load_list = rospy.get_param('/r1/talker/list_of_numbers')
-	print (load_list[0]['name'])
+	print (load_list["id2"]["name"])
 
     while not rospy.is_shutdown():
         str = info_text + rospy.get_time().__str__()

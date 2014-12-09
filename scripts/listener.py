@@ -51,6 +51,14 @@ def listener():
     # run simultaenously.
     rospy.init_node('listener', anonymous=True)
 
+    if rospy.has_param('/base_controller/IniDirectory'):
+	info_text = rospy.get_param('/base_controller/IniDirectory')
+	print info_text
+    if rospy.has_param('/r1/talker/message'):
+	info_text_02 = rospy.get_param('/r1/talker/message')
+	print info_text_02
+
+
     rospy.Subscriber("chatter", String, callback)
 
     # spin() simply keeps python from exiting until this node is stopped

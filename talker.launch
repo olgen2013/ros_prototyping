@@ -1,4 +1,5 @@
 <launch>
+	<param name="JohannesPARAM" value="1"/>
 	<group ns="r1">
 		<node name="talker" pkg="ros_prototyping" type="talker.py" output="screen">
 			<rosparam file="$(find ros_prototyping)/talker.yaml" command="load"/>
