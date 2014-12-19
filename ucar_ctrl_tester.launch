@@ -1,0 +1,7 @@
+<launch>
+	<param name="JohannesPARAM" value="1"/>
+	<group ns="r1">
+		<node name="ucar_ctrl_tester" pkg="ros_prototyping" type="ucar_ctrl_tester.py" output="screen">
+		</node>
+	</group>
+</launch>
