@@ -44,15 +44,15 @@ from geometry_msgs.msg import Twist
 from diagnostic_msgs.msg import DiagnosticStatus
 from control_msgs.msg import JointTrajectoryControllerState
 
-def test_Twist():
+def test_Twist(x, y, z):
     '''
     PUBLISHER METHODE: Twist
     '''
     pub_twist = rospy.Publisher('command', Twist, queue_size=10)
     Twist_msg = Twist()
-    Twist_msg.linear.x = random.uniform(0.0, 1.0) # 0.5
-    Twist_msg.linear.y = random.uniform(0.0, 1.0) # 0.23
-    Twist_msg.angular.z = random.uniform(0.0, 1.5) # 0.1
+    Twist_msg.linear.x = x #random.uniform(0.0, 1.0) # 0.5
+    Twist_msg.linear.y = y #random.uniform(0.0, 1.0) # 0.23
+    Twist_msg.angular.z = z #random.uniform(0.0, 1.5) # 0.1
 
     print "Twist: " + Twist_msg.linear.x.__str__() + " , " + Twist_msg.linear.y.__str__() + " , " + Twist_msg.angular.z.__str__()
     pub_twist.publish(Twist_msg)
@@ -92,7 +92,7 @@ def test_JointTrajectoryControllerState():
     message = JointTrajectoryControllerState()
     message.header.frame_id = "testID: 101"
 
-    message.joint_names = ["fl_caster_r_wheel_joint", "bl_caster_r_wheel_joint", "br_caster_r_wheel_joint", "fr_caster_r_wheel_joint", "fl_caster_rotation_joint", "bl_caster_rotation_joint", "br_caster_rotation_joint", "fr_caster_rotation_joint"]
+    message .joint_names = ["fl_caster_r_wheel_joint", "bl_caster_r_wheel_joint", "br_caster_r_wheel_joint", "fr_caster_r_wheel_joint", "fl_caster_rotation_joint", "bl_caster_rotation_joint", "br_caster_rotation_joint", "fr_caster_rotation_joint"]
     message.actual.velocities = [4,4,4,4,4,4,4,4]
     message.actual.positions = [4,4,4,4,4,4,4,4]
 
@@ -102,23 +102,36 @@ def test_JointTrajectoryControllerState():
 def usage():
     return "python_ucar_ctrl_Tester: ..."
 
+
 def auto_publish_messages():
     '''
     MAIN METHODE WITCH CONTROLS ALL PUBLSHERS
     '''
-
     rospy.init_node('talker', anonymous=True)
     r = rospy.Rate(10) # 10hz
- 
+
+    change = 0
+#    for ti in range(10):
     while not rospy.is_shutdown():
+        if change < 10 :
+            test_Twist(0.0,0.25,0.0)
+            change+=1
+        elif change >= 10 and change < 15:
+            test_Twist(0.0,0.0,0.0)
+            change+=1
+        else:
+            change = 0
+
         # call specific testing methods
-#        test_Twist()
-        #test_EmergencyStopState()
-        test_JointTrajectoryControllerState()
-        #test_DiagnosticStatus()
+#        test_EmergencyStopState()
+#        test_JointTrajectoryControllerState()
+#        test_DiagnosticStatus()
 
         r.sleep()
-        
+
+#    rospy.sleep(1.0)
+#    test_Twist(0.0,0.0,0.0)
+
 if __name__ == '__main__':
     try:
         auto_publish_messages()
